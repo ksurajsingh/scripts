@@ -1,0 +1,49 @@
+#!/bin/bash
+
+check_battery() {
+    while true; do
+        battery_level=$(acpi -b | grep -P -o '[0-9]+(?=%)')
+        charging=$(acpi -b | grep -P -o 'Charging|Full')
+
+        if [ "$charging" == "Charging" ] || [ "$charging" == "Full" ]; then
+            sleep 30
+            continue
+        fi
+
+        if [ "$battery_level" -lt 7 ]; then
+            while [ "$battery_level" -lt 7 ] && [ "$charging" != "Charging" ] && [ "$charging" != "Full" ]; do
+                notify-send "Battery Low ☠️" "Battery level is below 7%!" --urgency=critical
+                for i in {1..3}; do
+                    printf '\a'
+                    sleep 3
+                done
+                battery_level=$(acpi -b | grep -P -o '[0-9]+(?=%)')
+                charging=$(acpi -b | grep -P -o 'Charging|Full')
+            done
+        elif [ "$battery_level" -ge 7 ] && [ "$battery_level" -lt 12 ]; then
+            while [ "$battery_level" -ge 7 ] && [ "$battery_level" -lt 12 ] && [ "$charging" != "Charging" ] && [ "$charging" != "Full" ]; do
+                notify-send "Battery Warning 🔴" "Battery level is below 12%!" --urgency=critical
+                for i in {1..3}; do
+                    printf '\a'
+                    sleep 5
+                done
+                sleep 30
+                battery_level=$(acpi -b | grep -P -o '[0-9]+(?=%)')
+                charging=$(acpi -b | grep -P -o 'Charging|Full')
+            done
+        elif [ "$battery_level" -ge 12 ] && [ "$battery_level" -lt 15 ]; then
+            while [ "$battery_level" -ge 12 ] && [ "$battery_level" -lt 15 ] && [ "$charging" != "Charging" ] && [ "$charging" != "Full" ]; do
+                notify-send "Battery Notice ❗" "Battery level is below 15%!" --urgency=normal
+                printf '\a'
+                sleep 30
+                battery_level=$(acpi -b | grep -P -o '[0-9]+(?=%)')
+                charging=$(acpi -b | grep -P -o 'Charging|Full')
+            done
+        fi
+
+        sleep 30
+    done
+}
+
+check_battery
+
