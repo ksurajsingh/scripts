@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Check if jq is installed
+if ! command -v jq &> /dev/null
+then
+    echo "jq is required but it's not installed. Please install jq."
+    exit 1
+fi
+
+# Function to get repository size from GitHub
+get_github_repo_size() {
+    local owner=$1
+    local repo=$2
+
+    # GitHub API URL
+    local url="https://api.github.com/repos/${owner}/${repo}"
+
+    # Fetch repository details
+    local response=$(curl -s "$url")
+
+    # Extract size from the response
+    local size_kb=$(echo "$response" | jq '.size')
+
+    # Check if the response has the size field
+    if [ -z "$size_kb" ]; then
+        echo "Failed to retrieve the repository size. The repository may not exist or API rate limit may have been exceeded."
+    else
+        local size_mb=$(echo "scale=2; $size_kb / 1024" | bc)
+        echo "The size of the repository '${owner}/${repo}' is ${size_kb} KB |  ${size_mb} MB"
+    fi
+}
+
+# Main script
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 <owner> <repo>"
+    exit 1
+fi
+
+owner=$1
+repo=$2
+
+get_github_repo_size "$owner" "$repo"
