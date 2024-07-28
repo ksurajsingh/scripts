@@ -1,0 +1,3 @@
+swapoff /dev/zram0
+modprobe -r zram
+echo 1 > /sys/module/zswap/parameters/enabled
