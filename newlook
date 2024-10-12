@@ -1,0 +1,31 @@
+#!/bin/sh
+while true; do
+
+	pkill wallset
+	pkill xwallpaper
+	pkill wal
+	wallset -q
+
+	wall=$(find /mnt/KSS/Media/wallpapers/ -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.mp4" \) | shuf -n 1)
+
+
+	if [ "${wall##*.}" = "mp4" ]; then
+	    wallset --video  "$wall"
+	else
+	    xwallpaper --maximize "$wall"
+	fi
+
+	wal -c 
+	wal -i "$wall"
+	
+	xdotool key super+F5
+	
+	if [ "${wall##*.}" = "mp4" ]; then
+		sleep 86400
+	else
+		sleep 1800
+	fi
+
+done
+
+
