@@ -1,0 +1,19 @@
+#!/bin/sh
+
+
+getStatus(){
+ 	status=$(hyprctl monitors | grep dpms | cut -d":" -f 2 | xargs )
+}
+
+while true; do
+   getStatus;
+   echo status:$status
+   if [ "$status" = "1" ] ; then
+	   echo sleeping . . . .
+   	hyprctl dispatch dpms off;
+   else 
+	echo asleep.
+   fi
+   sleep 600;
+done
+
