@@ -9,7 +9,7 @@ while true; do
    getStatus;
    echo status:$status
    if [ "$status" = "1" ] ; then
-	   echo sleeping . . . .
+	   echo -e "was awake! \n going to sleep . . . ."
    	hyprctl dispatch dpms off;
    else 
 	echo asleep.
