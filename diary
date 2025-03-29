@@ -1,0 +1,34 @@
+#!/bin/bash 
+
+cd /mnt/KSS/Learnings/site/futurediary/
+
+file=$(date +%a-%b-%d-%Y.html)
+
+if [[ -f "$file" ]]; then 
+	nvim "$file"
+else
+
+	echo -e "<!DOCTYPE html>
+	<html>
+	  <head>\n
+	    <title> </title>
+    	<link rel=\"stylesheet\" href=\"style.css\"> \n
+	  </head>
+	  <body>\n
+    	<div id=\"heading\">
+      	<h1> </h1>
+    	  <sub id=\"blog-category\"> </sub> 
+    	</div>
+  	  <hr><hr>\n\n\n
+    </body>
+  </html>
+	
+	" >  "$file"
+	
+	if [[ -f "$file" ]]; then
+	  nvim "$file"
+	
+	else 
+	  echo "Failed creating the file";
+  fi
+fi
