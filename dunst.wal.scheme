@@ -1,0 +1,40 @@
+
+#!/bin/bash
+
+# Make sure wal ran
+if [ ! -f ~/.cache/wal/colors.sh ]; then
+    echo "Error: wal color file not found. Run 'wal -i <image>' first."
+    exit 1
+fi
+
+# Load pywal colors as shell variables
+source ~/.cache/wal/colors.sh
+
+# Setup associative array with pywal values
+declare -A wal
+
+for i in {0..15}; do
+    wal["COLOR$i"]=$(eval echo \$color$i)
+done
+
+wal["BACKGROUND"]=$background
+wal["FOREGROUND"]=$foreground
+
+# Build sed expression
+sed_expr=""
+for key in "${!wal[@]}"; do
+    value=${wal[$key]}
+    if [[ -z "$value" ]]; then
+        echo "Warning: $key is empty!"
+    fi
+    sed_expr+="s|$key|\"$value\"|g;"
+done
+
+# Perform substitution on template
+sed "$sed_expr" "/home/suraj/.config/dunst/dunstrc.template" > "/home/suraj/.config/dunst/dunstrc"
+
+# Restart dunst to apply new config
+pkill dunst 
+dunst &
+
+notify-send  $'\n Dunst color scheme set\n'
