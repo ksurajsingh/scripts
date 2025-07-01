@@ -19,6 +19,7 @@ while true; do
 	wal -i "$wall"
 	
 	xdotool key super+F5
+	dunst.wal.scheme
 	
 	if [ "${wall##*.}" = "mp4" ]; then
 		sleep 86400
