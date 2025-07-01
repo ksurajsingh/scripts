@@ -1,0 +1,26 @@
+ses="routine"
+tmux new-session -ds "$ses" "htop" 
+
+
+tmux split-window  -h -t "$ses"
+tmux send-keys -t "$ses":0.1 "watch sensors" C-m 
+
+tmux select-pane -t "$ses":0.1
+tmux split-window  -v -t  "$ses"
+tmux send-keys -t "$ses":0.2 "cpu" C-m
+
+
+tmux select-pane  -t "$ses":0.0 
+tmux split-window -v -t "$ses"
+tmux send-keys -t "$ses":0.1 "btop" C-m
+
+tmux select-pane -t "$ses":0.1
+tmux resize-pane -U 1
+
+
+tmux select-pane -t "$ses":0.3
+tmux resize-pane -D 10
+
+tmux new-window -t "$ses"
+
+tmux a
