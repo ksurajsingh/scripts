@@ -1,0 +1,3 @@
+xset s 900 900
+xss-lock -- xsecurelock &
+notify-send lock-set
