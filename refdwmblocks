@@ -1,0 +1,6 @@
+while true; do 
+  pkill dwmblocks
+  sleep 2
+  dwmblocks &
+  sleep 1800
+done
