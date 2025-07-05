@@ -9,6 +9,9 @@ tmux select-pane -t "$ses":0.1
 tmux split-window  -v -t  "$ses"
 tmux send-keys -t "$ses":0.2 "cpu" C-m
 
+tmux split-window -h -t "$ses"
+tmux send-keys -t "$ses":0.3 "pypr" C-m
+
 
 tmux select-pane  -t "$ses":0.0 
 tmux split-window -v -t "$ses"
