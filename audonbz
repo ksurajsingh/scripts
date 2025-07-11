@@ -1,0 +1,9 @@
+rfkill unblock bluetooth
+bluetoothctl power on 
+bluetoothctl scan off
+bluetoothctl scan on  
+bluetoothctl connect 10:3F:44:8B:06:F2 &
+bluetoothctl connect 2C:FD:B4:7E:65:6A &
+pactl set-default-sink bluez_output.2C_FD_B4_7E_65_6A.1
+notify-send "audio on bluetooths"
+
