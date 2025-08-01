@@ -1,4 +1,4 @@
-rfkill unblock bluetooth
+rfkill unblock bluetooth && 
 bluetoothctl power on 
 bluetoothctl scan off
 bluetoothctl scan on  
