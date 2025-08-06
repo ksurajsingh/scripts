@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-cd /mnt/KSS/Learnings/site/futurediary/
+cd /mnt/KSS/Learnings/fsd/site/futurediary/
 
 file=$(date +%a-%b-%d-%Y.html)
 
