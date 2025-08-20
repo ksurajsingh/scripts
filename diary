@@ -11,13 +11,13 @@ else
 	echo -e "<!DOCTYPE html>
 	<html>
 	  <head>\n
-	    <title> </title>
+	    <title></title>
     	<link rel=\"stylesheet\" href=\"style.css\"> \n
 	  </head>
 	  <body>\n
     	<div id=\"heading\">
-      	<h1> </h1>
-    	  <sub id=\"blog-category\"> </sub> 
+      	<h1></h1>
+    	  <sub id=\"blog-category\"></sub> 
     	</div>
   	  <hr><hr>\n\n\n
     </body>
