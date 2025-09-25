@@ -15,8 +15,9 @@ else
     	<link rel=\"stylesheet\" href=\"style.css\"> \n
 	  </head>
 	  <body>\n
-    	<div id=\"heading\">
+    	<div id=\"heading\"> 
       	<h1></h1>
+        $file
     	  <sub id=\"blog-category\"></sub> 
     	</div>
   	  <hr><hr>\n\n\n
