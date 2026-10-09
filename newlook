@@ -1,4 +1,7 @@
 #!/bin/sh
+
+wall_dir=/mnt/KSS/Media/wallpapers/
+
 while true; do
 
 	pkill wallset
@@ -6,7 +9,10 @@ while true; do
 	pkill wal
 	wallset -q
 
-	wall=$(find /mnt/KSS/Media/wallpapers/ -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.mp4" \) | shuf -n 1)
+  if [[ -d "$wall_dir" ]]; then
+    wall=$(find  -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.mp4" \) | shuf -n 1)
+  else
+    wall=$(ls $HOME/dot-files/*.(jpg|png))
 
 
 	if [ "${wall##*.}" = "mp4" ]; then
