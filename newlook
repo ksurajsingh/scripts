@@ -9,10 +9,11 @@ while true; do
 	pkill wal
 	wallset -q
 
-  if [[ -d "$wall_dir" ]]; then
-    wall=$(find  -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.mp4" \) | shuf -n 1)
-  else
-    wall=$(ls $HOME/dot-files/*.(jpg|png))
+  if [[ ! -d "$wall_dir" ]]; then
+    wall_dir="$HOME/dot-files/"
+  fi
+
+  wall=$(find  -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.mp4" \) | shuf -n 1)
 
 
 	if [ "${wall##*.}" = "mp4" ]; then
