@@ -13,7 +13,7 @@ while true; do
     wall_dir="$HOME/dot-files/"
   fi
 
-  wall=$(find  -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.mp4" \) | shuf -n 1)
+  wall=$(find $wall_dir -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.mp4" \) | shuf -n 1)
 
 
 	if [ "${wall##*.}" = "mp4" ]; then
@@ -22,6 +22,13 @@ while true; do
 	    xwallpaper --maximize "$wall"
 	fi
 
+  cur_wall_dir=$HOME/.cache/newlook
+  
+  if [[ ! -d "$cur_wall_dir" ]];then
+    mkdir -p "$cur_wall_dir"
+  fi
+
+  echo "$wall" >> $cur_wall_dir/cur_wal
 	wal -c 
 	wal -i "$wall"
 	
@@ -31,7 +38,7 @@ while true; do
 	if [ "${wall##*.}" = "mp4" ]; then
 		sleep 86400
 	else
-		sleep 1800
+		sleep 7200
 	fi
 
 done

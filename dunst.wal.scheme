@@ -2,6 +2,7 @@
 #!/bin/bash
 
 # Make sure wal ran
+
 if [ ! -f ~/.cache/wal/colors.sh ]; then
     echo "Error: wal color file not found. Run 'wal -i <image>' first."
     exit 1
@@ -31,10 +32,11 @@ for key in "${!wal[@]}"; do
 done
 
 # Perform substitution on template
-sed "$sed_expr" "/home/suraj/.config/dunst/dunstrc.template" > "/home/suraj/.config/dunst/dunstrc"
+sed "$sed_expr" "$HOME/.config/dunst/dunstrc.template" > "$HOME/.config/dunst/dunstrc"
 
 # Restart dunst to apply new config
 pkill dunst 
 dunst &
 
-notify-send  $'\n Dunst color scheme set\n'
+cur_wal_name="$(tail -n 1 $HOME/.cache/newlook/cur_wal | cut -d '/' -f 6)";
+notify-send  $'\n Dunst color scheme set\n' "$cur_wal_name"
