@@ -13,7 +13,7 @@ while true; do
     wall_dir="$HOME/dots/"
   fi
 
-  wall=$(find $wall_dir -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.mp4" \) | shuf -n 1)
+  wall=$(find $wall_dir -maxdepth 1 -type f \( -name "*.jpg" -o -name "*.png" -o -name "*.mp4" \) | shuf -n 1)
 
 
 	if [ "${wall##*.}" = "mp4" ]; then
